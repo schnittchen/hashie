@@ -292,10 +292,17 @@ describe Hashie::Mash do
     class SubMash < Hashie::Mash
     end
 
+    class SubHash < Hash
+    end
+
     record = Hashie::Mash.new
     son = SubMash.new
     record['submash'] = son
     expect(record['submash']).to be_kind_of(SubMash)
+
+    another_son = SubHash.new
+    record['subhash'] = another_son
+    expect(record['subhash']).to be_kind_of(SubHash)
   end
 
   it 'respects the class when passed a bang method for a non-existent key' do
